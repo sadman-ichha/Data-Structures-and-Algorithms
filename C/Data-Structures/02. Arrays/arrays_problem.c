@@ -2,8 +2,8 @@
 
 int main()
 {
-    int i, element, length, backward, abs;
-    int arr[10] = {5, 3, -4, 7, 10, 12, 11, -8, 15, 1};
+    int i, element, length, backward, abs, even, odd, sum = 0, temp_mini;
+    int arr[10] = {5, 3, -4, 7, 10, 12, 11, -8, 15, 20};
 
     length = sizeof(arr) / sizeof(arr[0]); // Calculate the length of the array:
                                            // sizeof(arr) gives the total size of the array in bytes, 10*4 = 40 bytes
@@ -40,6 +40,58 @@ int main()
         }
         printf("%d ", abs);
     }
+
+    printf("\n");
+
+    // Printng for EVEN NUMBER
+    printf("EVEN NUMBER PRINT: ");
+    for (i = 0; i < length; i++)
+    {
+        even = arr[i];
+        if (even % 2 == 0)
+        {
+            printf("%d ", even);
+        }
+    }
+
+    printf("\n");
+
+    // Printng for ODD NUMBER
+    printf("ODD NUMBER PRINT: ");
+    for (i = 0; i < length; i++)
+    {
+        odd = arr[i];
+        if (odd % 2 != 0)
+        {
+            printf("%d ", odd);
+        }
+    }
+
+    printf("\n");
+
+    // Printng for SUM NUMBER
+    printf("SUM NUMBER PRINT: ");
+    for (i = 0; i < length; i++)
+    {
+        sum = sum + arr[i];
+    }
+    printf("%d ", sum);
+    // printf("%.2f ", sum / length);
+
+    printf("\n");
+
+    // Printng for MINIMUN NUMBER
+    printf("MINIMUN NUMBER PRINT: ");
+    int min = arr[0];
+    for (i = 0; i < length; i++)
+    {
+        temp_mini = arr[i];
+        if (min > temp_mini)
+        {
+            min = temp_mini;
+        }
+    }
+    printf("%d ", min);
 
     return 0;
 }
