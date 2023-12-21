@@ -1,13 +1,6 @@
 #include <stdio.h>
 
-void printArray(int arr[], int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        printf("%d  ", arr[i]);
-    }
-    printf("\n");
-}
+void printArray(int arr[], int length); 
 
 int main()
 {
@@ -35,4 +28,13 @@ int main()
     printArray(arr, length);
 
     return 0;
+}
+
+void printArray(int arr[], int length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+    printf("\n");
 }
