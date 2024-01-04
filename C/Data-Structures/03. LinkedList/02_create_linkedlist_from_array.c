@@ -7,6 +7,28 @@ struct Node
     int data;
     struct Node *next;
 };
+// create Link List function protype
+struct Node *createLinkedList(int arr[], int length);
+
+int main()
+{
+    int arrList[] = {5, 10, 15, 20,2};
+    int length = sizeof(arrList) / sizeof(arrList[0]);
+    struct Node *head; // Declare a pointer to the head of the linked list
+
+    // Create the linked list and assign the returned head to 'head' pointer
+    head = createLinkedList(arrList, length);
+
+    // Traverse the linked list and print the data of each node
+    while (head != NULL)
+    {
+        printf("%d, ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n"); // Print NULL to signify the end of the list
+    return 0;
+}
+
 
 // Function to create a linked list from an array
 struct Node *createLinkedList(int arr[], int length)
@@ -40,21 +62,3 @@ struct Node *createLinkedList(int arr[], int length)
     return head; // Return the head of the linked list
 }
 
-int main()
-{
-    int arrList[] = {5, 10, 15, 20,2};
-    int length = sizeof(arrList) / sizeof(arrList[0]);
-    struct Node *head; // Declare a pointer to the head of the linked list
-
-    // Create the linked list and assign the returned head to 'head' pointer
-    head = createLinkedList(arrList, length);
-
-    // Traverse the linked list and print the data of each node
-    while (head != NULL)
-    {
-        printf("%d, ", head->data);
-        head = head->next;
-    }
-    printf("NULL\n"); // Print NULL to signify the end of the list
-    return 0;
-}
