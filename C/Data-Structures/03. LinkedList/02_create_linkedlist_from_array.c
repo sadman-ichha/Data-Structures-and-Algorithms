@@ -42,7 +42,7 @@ struct Node *createLinkedList(int arr[], int length)
     for (i = 0; i < length; i++)
     {
         // Create a new node
-        temp = (struct Node *)malloc(sizeof(struct Node));
+        temp = (struct Node *)malloc(sizeof(struct Node)); //dynamic memory allocation
         temp->data = arr[i];
         temp->next = NULL;
 
