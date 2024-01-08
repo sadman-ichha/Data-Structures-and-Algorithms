@@ -2,107 +2,154 @@
 #include <stdlib.h>
 
 // Node structure for a doubly linked list
-struct node {
+struct node
+{
     struct node *prev; // Pointer to the previous node
-    int data; // Data stored in the node
+    int data;          // Data stored in the node
     struct node *next; // Pointer to the next node
 };
 
 typedef struct node Node; // Typedef for simplicity
 
 // Function declarations
-Node *createNode(int data); // Creates a new node
-void printLinkedList(Node *head); // Prints the linked list
+Node *createNode(int data);                   // Creates a new node
+void printLinkedList(Node *head);             // Prints the linked list
 void insertAtBegining(Node **head, int data); // Inserts a node at the beginning
-void insertAtEnd(Node **head, int data); // Inserts a node at the end
-void removeNode(Node **head, int data); // Removes a node by value
-void reverseList(Node **head); // Reverses the linked list
+void insertAtEnd(Node **head, int data);      // Inserts a node at the end
+void removeNode(Node **head, int data);       // Removes a node by value
+void reverseList(Node **head);                // Reverses the linked list
 
-// Main function
-int main() {
-    Node *head = NULL; // Initializing an empty linked list
+int main()
+{
+    int input_value;
+    Node *head = NULL;
 
-    // Inserting nodes at the beginning and end of the list
-    insertAtBegining(&head, 10);
-    insertAtBegining(&head, 5);
-    insertAtEnd(&head, 15);
-    insertAtEnd(&head, 20);
-    insertAtEnd(&head, 25);
+    do
+    {
+        printf("\n----Menu----\n");
+        printf("\n1. Insert At Begining Linked List");
+        printf("\n2. Insert At Ending Linked List");
+        printf("\n3. Remove a Node Linked List");
+        printf("\n4. Reverse a Linked List");
+        printf("\n5. Display List");
+        printf("\n6. Exit");
+        printf("\nEnter your Choice: ");
+        scanf("%d", &input_value);
+        printf("\n");
 
+        switch (input_value)
+        {
+        case 1:
+            printf("Enter value to insert at beginning: ");
+            int value;
+            scanf("%d", &value);
+            insertAtBegining(&head, value);
+            break;
+        case 2:
+            printf("Enter value to insert at Ending: ");
+            scanf("%d", &value);
+            insertAtEnd(&head, value);
+            break;
+        case 3:
+            printf("Enter value to Removing a node: ");
+            scanf("%d", &value);
+            removeNode(&head, value);
+            break;
+        case 4:
+            printf("Reverse the linked list: ");
+            reverseList(&head);
+            break;
+        case 5:
+            printf("Linked List: ");
+            printLinkedList(head);
+            break;
+        case 6:
+            printf("Have a nice day!!!\n");
+            exit(0);
+            break;
+        default:
+            printf("\n----INVALID CHOICE!----\n");
+            break;
+        }
 
-
-    // Printing the original list
-    printf("Linked List: ");
-    printLinkedList(head);
-
-    // Removing a node and printing the updated list
-    int removeValue = 5;
-    removeNode(&head, removeValue);
-    printf("List after removing %d: ", removeValue);
-    printLinkedList(head);
-
-    // Reversing the list
-    reverseList(&head);
-
-    // Displaying the reversed list
-    printf("Reversed List: ");
-    printLinkedList(head);
+    } while (input_value);
 
     return 0;
 }
 
 // Function to reverse the doubly linked list
-void reverseList(Node **head) {
-    Node *temp = NULL, *current = *head;
+void reverseList(Node **head)
+{
 
-    while (current != NULL) {
+    Node *temp = NULL, *current = *head;
+    if (current == NULL)
+    {
+        printf("Linked List is empty!\n");
+        return;
+    }
+    while (current != NULL)
+    {
         temp = current->prev;
         current->prev = current->next;
         current->next = temp;
         current = current->prev;
     }
 
-    if (temp != NULL) {
+    if (temp != NULL)
+    {
         *head = temp->prev;
     }
 }
 
 // Function to remove a node by value
-void removeNode(Node **head, int data) {
-    if (*head == NULL) {
+void removeNode(Node **head, int data)
+{
+    if (*head == NULL)
+    {
         printf("Linked List is empty!\n");
         return;
     }
 
     Node *temp = *head;
-    while (temp != NULL && temp->data != data) {
+    while (temp != NULL && temp->data != data)
+    {
         temp = temp->next;
     }
-    if (temp == NULL) {
+    if (temp == NULL)
+    {
         printf("Node not found!\n");
         return;
     }
 
-    if (temp->prev == NULL) {
+    if (temp->prev == NULL)
+    {
         *head = temp->next;
-    } else {
+    }
+    else
+    {
         temp->prev->next = temp->next;
     }
 
-    if (temp->next != NULL) {
+    if (temp->next != NULL)
+    {
         temp->next->prev = temp->prev;
     }
     free(temp);
 }
 
 // Function to insert a node at the end of the list
-void insertAtEnd(Node **head, int data) {
+void insertAtEnd(Node **head, int data)
+{
     Node *newNode = createNode(data);
-    if (*head == NULL) {
+    if (*head == NULL)
+    {
         *head = createNode(data);
-    } else {
+    }
+    else
+    {
         Node *temp = *head;
-        while (temp->next != NULL) {
+        while (temp->next != NULL)
+        {
             temp = temp->next;
         }
         temp->next = newNode;
@@ -111,11 +158,15 @@ void insertAtEnd(Node **head, int data) {
 }
 
 // Function to insert a node at the beginning of the list
-void insertAtBegining(Node **head, int data) {
+void insertAtBegining(Node **head, int data)
+{
     Node *newNode = createNode(data);
-    if (*head == NULL) {
+    if (*head == NULL)
+    {
         *head = createNode(data);
-    } else {
+    }
+    else
+    {
         newNode->next = *head;
         (*head)->prev = newNode;
         *head = newNode;
@@ -123,9 +174,11 @@ void insertAtBegining(Node **head, int data) {
 }
 
 // Function to create a new node
-Node *createNode(int data) {
+Node *createNode(int data)
+{
     Node *new_node = (Node *)malloc(sizeof(Node));
-    if (new_node == NULL) {
+    if (new_node == NULL)
+    {
         printf("Memory allocation failed!\n");
         exit(1);
     }
@@ -136,14 +189,17 @@ Node *createNode(int data) {
 }
 
 // Function to print the linked list
-void printLinkedList(Node *head) {
+void printLinkedList(Node *head)
+{
     Node *current = head;
 
-    if (head == NULL) {
+    if (head == NULL)
+    {
         printf("List is empty!\n");
         return;
     }
-    while (current != NULL) {
+    while (current != NULL)
+    {
         printf("%d -> ", current->data);
         current = current->next;
     }
