@@ -54,10 +54,12 @@ int main()
             printf("Enter value to Removing a node: ");
             scanf("%d", &value);
             removeNode(&head, value);
+            printLinkedList(head);
             break;
         case 4:
             printf("Reverse the linked list: ");
             reverseList(&head);
+            printLinkedList(head);
             break;
         case 5:
             printf("Linked List: ");
@@ -76,25 +78,29 @@ int main()
 
     return 0;
 }
-
 // Function to reverse the doubly linked list
 void reverseList(Node **head)
 {
-
+    // Declarations of pointers 'temp' and 'current'
     Node *temp = NULL, *current = *head;
+
+    // Check if the linked list is empty
     if (current == NULL)
     {
         printf("Linked List is empty!\n");
         return;
     }
+
+    // Reversing the linked list
     while (current != NULL)
     {
-        temp = current->prev;
-        current->prev = current->next;
-        current->next = temp;
-        current = current->prev;
+        temp = current->prev;          // Store the previous node
+        current->prev = current->next; // Reversing pointers
+        current->next = temp;          // Assign next to previous
+        current = current->prev;       // Move to the next node
     }
 
+    // Adjusting the head if needed
     if (temp != NULL)
     {
         *head = temp->prev;
@@ -104,23 +110,30 @@ void reverseList(Node **head)
 // Function to remove a node by value
 void removeNode(Node **head, int data)
 {
+    // Check if the linked list is empty
     if (*head == NULL)
     {
         printf("Linked List is empty!\n");
         return;
     }
 
+    // Pointer to traverse the list
     Node *temp = *head;
+
+    // Traversing the list to find the node with given data
     while (temp != NULL && temp->data != data)
     {
         temp = temp->next;
     }
+
+    // Node not found
     if (temp == NULL)
     {
         printf("Node not found!\n");
         return;
     }
 
+    // Adjusting pointers to remove the node
     if (temp->prev == NULL)
     {
         *head = temp->next;
@@ -134,24 +147,32 @@ void removeNode(Node **head, int data)
     {
         temp->next->prev = temp->prev;
     }
+
+    // Freeing memory for the removed node
     free(temp);
 }
 
 // Function to insert a node at the end of the list
 void insertAtEnd(Node **head, int data)
 {
+    // Creating a new node
     Node *newNode = createNode(data);
+
+    // If the list is empty, the new node becomes the head
     if (*head == NULL)
     {
         *head = createNode(data);
     }
     else
     {
+        // Traverse the list to find the last node
         Node *temp = *head;
         while (temp->next != NULL)
         {
             temp = temp->next;
         }
+
+        // Insert the new node at the end
         temp->next = newNode;
         newNode->prev = temp;
     }
@@ -160,13 +181,17 @@ void insertAtEnd(Node **head, int data)
 // Function to insert a node at the beginning of the list
 void insertAtBegining(Node **head, int data)
 {
+    // Creating a new node
     Node *newNode = createNode(data);
+
+    // If the list is empty, the new node becomes the head
     if (*head == NULL)
     {
         *head = createNode(data);
     }
     else
     {
+        // Inserting at the beginning
         newNode->next = *head;
         (*head)->prev = newNode;
         *head = newNode;
@@ -176,28 +201,38 @@ void insertAtBegining(Node **head, int data)
 // Function to create a new node
 Node *createNode(int data)
 {
+    // Allocating memory for the new node
     Node *new_node = (Node *)malloc(sizeof(Node));
+
+    // Check for memory allocation failure
     if (new_node == NULL)
     {
         printf("Memory allocation failed!\n");
         exit(1);
     }
+
+    // Initializing the new node
     new_node->prev = NULL;
     new_node->data = data;
     new_node->next = NULL;
+
     return new_node;
 }
 
 // Function to print the linked list
 void printLinkedList(Node *head)
 {
+    // Starting from the head of the list
     Node *current = head;
 
+    // Check if the list is empty
     if (head == NULL)
     {
         printf("List is empty!\n");
         return;
     }
+
+    // Traversing and printing the list
     while (current != NULL)
     {
         printf("%d -> ", current->data);
