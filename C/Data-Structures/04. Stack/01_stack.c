@@ -1,8 +1,8 @@
 #include <stdio.h>
-#define MAX 3
+#define MAXSTK 3
 
 // Global Variables
-int stack_arr[MAX]; // Array to hold stack elements
+int stack_arr[MAXSTK]; // Array to hold stack elements
 int top = -1;       // Variable to keep track of the top of the stack
 
 void push(int data);
@@ -29,7 +29,7 @@ int main()
 void push(int data)
 {
     // Check if the stack is not full
-    if (top < MAX - 1)
+    if (top < MAXSTK - 1)
     {
         top = top + 1;         // Move the top pointer
         stack_arr[top] = data; // Add the element to the stack
