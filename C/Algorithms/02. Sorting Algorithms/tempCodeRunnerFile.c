@@ -1,1 +1,0 @@
- printArray(arr, length);
