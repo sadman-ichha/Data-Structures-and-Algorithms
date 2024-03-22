@@ -11,7 +11,7 @@ struct BTree {
 struct BTree *r = NULL;
 struct BTree *np = NULL;
 struct BTree *x = NULL;
-//creation of node
+// creation of node
 struct BTree* init() {
    int i;
    np = (struct BTree*)malloc(sizeof(struct BTree));
